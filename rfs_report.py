@@ -7,12 +7,13 @@ import pandas as pd
 from halo import Halo
 from termcolor import colored
 
-spinner = Halo(text='Running RFS Report', spinner="simpleDotsScrolling")
+spinner = Halo(text='Running RFS Report...', spinner="simpleDotsScrolling")
 
 spinner.start()
 
 
 try:
+    spinner.text = 'Reading files...'
     oekb_rfs_file = pd.read_excel('data/oekb_rfs.xlsx')
     oekb_melde_file = pd.read_excel('data/oekb_melde.xlsx')
     report_file = pd.read_csv('data/report.csv')
@@ -24,6 +25,7 @@ OeKB Meldefonds List:   ./data/oekb_melde.xlsx
 Lipper RFS Report:      ./data/report.csv""")
     os.system('pause')
 else:
+    spinner.text = 'Comparing status...'
     oekb_rfs = set(oekb_rfs_file['ISIN'])
 
     oekb_melde_all = set(
